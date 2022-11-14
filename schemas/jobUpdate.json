@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": [],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "salary": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "equity": {
+      "type": "string"
+    },
+    "companyHandle": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
