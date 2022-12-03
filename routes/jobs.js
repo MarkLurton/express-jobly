@@ -56,6 +56,11 @@ router.get("/", async function (req, res, next) {
     if (Object.keys(req.query).length == 0) {
       jobs = await Job.findAll();
     } else {
+      const validator = jsonschema.validate(req.body, jobSearchSchema);
+      if (!validator.valid) {
+        const errs = validator.errors.map((e) => e.stack);
+        throw new BadRequestError(errs);
+      }
       jobs = await Job.findFiltered(req.query);
     }
     return res.json({ jobs });

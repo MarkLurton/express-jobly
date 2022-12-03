@@ -92,6 +92,17 @@ describe("GET /jobs", function () {
     });
   });
 
+  test("bad filter value", async function () {
+    try {
+      let filters = {
+        thisShoudntWork: "please don't work",
+      };
+      const resp = await request(app).get("/jobs?badfilter=shouldntwork");
+    } catch (err) {
+      expect(err instanceof BadRequestError).toBeTruthy();
+    }
+  });
+
   test("fails: test next() handler", async function () {
     // there's no normal failure event which will cause this route to fail ---
     // thus making it hard to test that the error-handler works with it. This

@@ -78,17 +78,6 @@ class Company {
     let companiesRes;
     const keys = Object.keys(filters);
     console.log(keys);
-    for (let key of keys) {
-      if (
-        key != "companyName" &&
-        key != "minEmployees" &&
-        key != "maxEmployees"
-      ) {
-        throw new BadRequestError(
-          `${key} is not a valid filter field. Please select filter of companyName, minEmployees, or maxEmployees.`
-        );
-      }
-    }
     if (keys.length == 3) {
       let { companyName, minEmployees, maxEmployees } = filters;
       minEmployees = Number(minEmployees);

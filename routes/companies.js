@@ -10,6 +10,7 @@ const { ensureAdmin } = require("../middleware/auth");
 const Company = require("../models/company");
 
 const companyNewSchema = require("../schemas/companyNew.json");
+const companySearchSchema = require("../schemas/companySearch.json");
 const companyUpdateSchema = require("../schemas/companyUpdate.json");
 
 const router = new express.Router();
@@ -56,6 +57,11 @@ router.get("/", async function (req, res, next) {
     if (Object.keys(req.query).length == 0) {
       companies = await Company.findAll();
     } else {
+      const validator = jsonschema.validate(req.body, companySearchSchema);
+      if (!validator.valid) {
+        const errs = validator.errors.map((e) => e.stack);
+        throw new BadRequestError(errs);
+      }
       companies = await Company.findFiltered(req.query);
     }
     return res.json({ companies });

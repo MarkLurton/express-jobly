@@ -75,13 +75,6 @@ class Job {
     let jobsRes;
     const keys = Object.keys(filters);
     console.log(keys);
-    for (let key of keys) {
-      if (key != "title" && key != "minSalary" && key != "hasEquity") {
-        throw new BadRequestError(
-          `${key} is not a valid filter field. Please select filter of title, minSalary, or hasEquity.`
-        );
-      }
-    }
     if (keys.length == 3) {
       let { title, minSalary, hasEquity } = filters;
       minSalary = Number(minSalary);

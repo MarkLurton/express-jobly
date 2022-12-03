@@ -171,17 +171,6 @@ describe("findFiltered", function () {
     ]);
   });
 
-  test("bad filter value", async function () {
-    try {
-      let filters = {
-        thisShoudntWork: "please don't work",
-      };
-      let companies = await Company.findFiltered(filters);
-    } catch (err) {
-      expect(err instanceof BadRequestError).toBeTruthy();
-    }
-  });
-
   test("bad min and max filters", async function () {
     try {
       let filters = {
